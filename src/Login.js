@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://backend-login-6x56.onrender.com/login', {
+      const response = await axios.post('${apiUrl}/token', {
         username: formData.email,
         password: formData.password,
       });
