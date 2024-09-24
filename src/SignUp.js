@@ -228,10 +228,10 @@ const SignUp = () => {
               required
             >
               <option value="">Select a role</option>
-              <option value="patient">Patient</option>
-              <option value="doctor">Healthcare Provider</option>
-              <option value="nurse">Healthcare Assistant</option>
-              <option value="admin">Caregiver</option>
+              <option value="Patient">Patient</option>
+              <option value="HealthCarePro">Healthcare Provider</option>
+              <option value="HeathCareAss">Healthcare Assistant</option>
+              <option value="CareGiver">Caregiver</option>
             </select>
           </div>
           {serverError && <p className="error-message">{serverError}</p>}
