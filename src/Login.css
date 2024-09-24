@@ -1,0 +1,115 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('/Users/Lucifer/Desktop/Independent Study Project /frontend/signup-page/src/Background_pic.png') no-repeat center center;
+  background-size: cover ;
+  position: relative; /* Allows positioning of the header */
+}
+
+.login-header {
+  position: absolute; /* Position header at the top left */
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  width: 50px; /* Adjust width as needed */
+  height: auto;
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.company-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff; /* Adjust color based on your background */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Adds subtle shadow for readability */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  transition: transform 0.3s;
+}
+
+.login-form:hover {
+  transform: translateY(-5px);
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+  align-self: flex-start; /* Aligns the label to the start */
+}
+
+.form-group input {
+  width: 90%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  background-color: #fff;
+}
+
+.form-group input::placeholder {
+  color: #999;
+  opacity: 0.8;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.submit-button {
+  width: 90%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 10px rgba(0, 91, 179, 0.3);
+}
