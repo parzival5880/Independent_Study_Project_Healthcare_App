@@ -103,7 +103,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // Correctly use backticks for template literals
-      const response = await axios.post(`${apiUrl}/token`, {
+      const response = await axios.post(`${apiUrl}/login`, {
         username: formData.email,
         password: formData.password,
       });
