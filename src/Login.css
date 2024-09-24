@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('/Users/Lucifer/Desktop/Independent Study Project /frontend/signup-page/src/Background_pic.png') no-repeat center center;
+  background: url('./Background_pic.png') no-repeat center center;
   background-size: cover ;
   position: relative; /* Allows positioning of the header */
 }
