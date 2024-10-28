@@ -103,6 +103,7 @@ const Login = ({ onSuccess, onSwitchToRegister }) => {
       }
 
       const data = await response.json();
+      console.log(data)
       localStorage.setItem('authToken', data.token);
       setResponseMessage(`Welcome ${data.user || 'User'}!`);
       onSuccess();
