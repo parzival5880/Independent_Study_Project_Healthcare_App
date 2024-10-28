@@ -287,33 +287,126 @@
 
 // export default App;
 
+// import React, { useState } from 'react';
+// import Login from './Login';
+
+// const App = () => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+//   const handleLoginSuccess = () => {
+//     setIsLoggedIn(true);
+//     console.log('User logged in successfully!');
+//   };
+
+//   const switchToRegister = () => {
+//     console.log('Switch to register component');
+//   };
+
+//   return (
+//     <div>
+//       {!isLoggedIn ? (
+//         <Login
+//           onSuccess={handleLoginSuccess}
+//           onSwitchToRegister={switchToRegister}
+//         />
+//       ) : (
+//         <h2>Welcome, you are logged in!</h2>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default App;
+
 import React, { useState } from 'react';
-import Login from './Login';
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+// Login Component
+const Login = ({ onSuccess, onSwitchToRegister }) => {
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const [responseMessage, setResponseMessage] = useState('');
 
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-    console.log('User logged in successfully!');
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://backend-login-1-xc0i.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
 
-  const switchToRegister = () => {
-    console.log('Switch to register component');
-  };
+      if (!response.ok) {
+        throw new Error('Invalid email or password');
+      }
 
-  return (
-    <div>
-      {!isLoggedIn ? (
-        <Login
-          onSuccess={handleLoginSuccess}
-          onSwitchToRegister={switchToRegister}
-        />
-      ) : (
-        <h2>Welcome, you are logged in!</h2>
-      )}
-    </div>
-  );
+      const data = await response.json(); // Extract response data
+      console.log('Response:', data); // Log response for debugging
+      setResponseMessage(`Welcome ${data.user || 'User'}!`); // Display a friendly message
+      localStorage.setItem('authToken', data.token); // Store token in local storage
+      onSuccess(); // Handle successful login
+
+    } catch (error) {
+      setError(error.message || 'Login failed. Please try again.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-8">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Welcome Back</h2>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+        {responseMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {responseMessage}
+          </div>
+        )}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input
+              type="email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter your email"
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter your password"
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition duration-300 shadow-lg"
+          >
+            Sign In
+          </button>
+        </form>
+        <div className="mt-6 text-center">
+          <button
+            onClick={onSwitchToRegister}
+            className="text-blue-600 hover:text-blue-800 font-medium"
+          >
+            Don't have an account? Sign up
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default App;
+export default Login;
