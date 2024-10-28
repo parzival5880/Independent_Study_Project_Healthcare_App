@@ -37,24 +37,49 @@ const useLoginState = () => {
   return { currentView, setCurrentView, isLoggedIn, setIsLoggedIn };
 };
 
-const Login = ({ onSuccess, onSwitchToRegister }) => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+// const Login = ({ onSuccess, onSwitchToRegister }) => {
+//   const [credentials, setCredentials] = useState({ email: '', password: '' });
+//   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // For demo, just check if fields are filled
-      if (credentials.email && credentials.password) {
-        localStorage.setItem('isLoggedIn', 'true');
-        onSuccess();
-      } else {
-        setError('Please fill in all fields');
-      }
-    } catch (error) {
-      setError(error.message || 'Login failed');
-    }
-  };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       // For demo, just check if fields are filled
+//       if (credentials.email && credentials.password) {
+//         localStorage.setItem('isLoggedIn', 'true');
+//         onSuccess();
+//       } else {
+//         setError('Please fill in all fields');
+//       }
+//     } catch (error) {
+//       setError(error.message || 'Login failed');
+//     }
+//   };
+
+const Login = ({ onSuccess, onSwitchToRegister }) => {
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [error, setError] = useState('');
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch('https://backend-login-1-xc0i.onrender.com/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(credentials),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Invalid email or password');
+        }
+  
+        const data = await response.json();
+        localStorage.setItem('authToken', data.token); // Store token
+        onSuccess(); // Handle successful login
+      } catch (error) {
+        setError(error.message || 'Login failed');
+      }
+    };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center p-4">
