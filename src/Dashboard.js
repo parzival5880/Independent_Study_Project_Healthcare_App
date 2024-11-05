@@ -1,19 +1,88 @@
+// import React from 'react';
+// import { Activity, BarChart, FileText, Users, Shield, Settings } from 'lucide-react';
+// import OverviewCard from './OverviewCard';
+// import Navigation from './Navigation';
+// import { useRouter } from './Router';
+
+// const Dashboard = () => {
+//   const { navigate } = useRouter();
+
+//   const overviewCards = [
+//     { title: 'Sensor Management', icon: Activity, description: 'Manage sensors, view status, and monitor readings', path: '/dashboard/sensor-management' },
+//     { title: 'Sensor Logs', icon: BarChart, description: 'Track sensor data logs and historical readings', path: '/dashboard/sensor-logs' },
+//     { title: 'Access Logs', icon: FileText, description: 'Monitor system access and user activities', path: '/dashboard/access-logs' },
+//     { title: 'Authorized Users', icon: Users, description: 'Manage user permissions and access levels', path: '/dashboard/authorized-users' },
+//     { title: 'Account Requests', icon: Shield, description: 'Handle new account and access requests', path: '/dashboard/account-requests' },
+//     { title: 'Sensor Modifications', icon: Settings, description: 'Track and manage sensor configuration changes', path: '/dashboard/sensor-modifications' },
+//   ];
+
+//   return (
+//     <div className="min-h-screen bg-gray-50">
+//       <Navigation />
+//       <main className="max-w-7xl mx-auto px-4 py-8">
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//           {overviewCards.map((card) => (
+//             <OverviewCard
+//               key={card.path}
+//               {...card}
+//               onClick={() => navigate(card.path)}
+//             />
+//           ))}
+//         </div>
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+
 import React from 'react';
 import { Activity, BarChart, FileText, Users, Shield, Settings } from 'lucide-react';
 import OverviewCard from './OverviewCard';
 import Navigation from './Navigation';
-import { useRouter } from './Router';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate(); // Use navigate from react-router-dom
 
   const overviewCards = [
-    { title: 'Sensor Management', icon: Activity, description: 'Manage sensors, view status, and monitor readings', path: '/dashboard/sensor-management' },
-    { title: 'Sensor Logs', icon: BarChart, description: 'Track sensor data logs and historical readings', path: '/dashboard/sensor-logs' },
-    { title: 'Access Logs', icon: FileText, description: 'Monitor system access and user activities', path: '/dashboard/access-logs' },
-    { title: 'Authorized Users', icon: Users, description: 'Manage user permissions and access levels', path: '/dashboard/authorized-users' },
-    { title: 'Account Requests', icon: Shield, description: 'Handle new account and access requests', path: '/dashboard/account-requests' },
-    { title: 'Sensor Modifications', icon: Settings, description: 'Track and manage sensor configuration changes', path: '/dashboard/sensor-modifications' },
+    {
+      title: 'Sensor Management',
+      icon: Activity,
+      description: 'Manage sensors, view status, and monitor readings',
+      path: 'sensors',
+    },
+    {
+      title: 'Sensor Logs',
+      icon: BarChart,
+      description: 'Track sensor data logs and historical readings',
+      path: 'sensor-logs',
+    },
+    {
+      title: 'Access Logs',
+      icon: FileText,
+      description: 'Monitor system access and user activities',
+      path: 'access-logs',
+    },
+    {
+      title: 'Authorized Users',
+      icon: Users,
+      description: 'Manage user permissions and access levels',
+      path: 'authorized-users',
+    },
+    {
+      title: 'Account Requests',
+      icon: Shield,
+      description: 'Handle new account and access requests',
+      path: 'account-requests',
+    },
+    {
+      title: 'Sensor Modifications',
+      icon: Settings,
+      description: 'Track and manage sensor configuration changes',
+      path: 'modifications', // Navigate to modifications
+    },
   ];
 
   return (
@@ -25,7 +94,7 @@ const Dashboard = () => {
             <OverviewCard
               key={card.path}
               {...card}
-              onClick={() => navigate(card.path)}
+              onClick={() => navigate(`/dashboard/${card.path}`)}
             />
           ))}
         </div>
